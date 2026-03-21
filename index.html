@@ -19,8 +19,9 @@
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
-    body{font-family:'Exo 2',sans-serif;background:var(--ob1);color:var(--tx);overflow-x:hidden;cursor:crosshair;}
+    body{font-family:'Exo 2',sans-serif;background:var(--ob1);color:var(--tx);overflow-x:hidden;cursor:default;}
 
+    /* BG LAYERS */
     .bg{position:fixed;inset:0;z-index:0;pointer-events:none;
       background:radial-gradient(ellipse 75% 60% at 0% 0%,rgba(18,12,4,0.98) 0%,transparent 60%),
         radial-gradient(ellipse 65% 55% at 100% 100%,rgba(10,8,4,0.97) 0%,transparent 60%),
@@ -33,25 +34,26 @@
     .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.05;
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size:160px 160px;}
+
+    /* SHIMMER BAR */
     .shimmer{position:fixed;top:0;left:0;right:0;z-index:500;height:2px;
       background:linear-gradient(90deg,transparent,var(--g5) 20%,var(--g2) 50%,var(--g5) 80%,transparent);
       background-size:200% 100%;animation:sh 5s ease-in-out infinite;}
     @keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
-    #cg{position:fixed;z-index:2;pointer-events:none;width:380px;height:380px;border-radius:50%;
-      background:radial-gradient(circle,rgba(232,184,75,0.05) 0%,transparent 70%);
-      transform:translate(-50%,-50%);transition:left .7s cubic-bezier(.16,1,.3,1),top .7s cubic-bezier(.16,1,.3,1);}
 
+    /* CURSOR TRAIL CANVAS */
+    #trail{position:fixed;inset:0;z-index:9998;pointer-events:none;}
+
+    /* NAV */
     nav{position:fixed;top:2px;left:0;right:0;z-index:400;padding:18px 0;
       backdrop-filter:blur(36px) saturate(1.6) brightness(0.35);
       background:rgba(3,5,7,0.92);border-bottom:1px solid var(--bdr);}
     nav::after{content:'';position:absolute;bottom:0;left:8%;right:8%;height:1px;
       background:linear-gradient(90deg,transparent,var(--g4) 30%,var(--g3) 50%,var(--g4) 70%,transparent);opacity:.45;}
     .ni{max-width:1200px;margin:0 auto;padding:0 44px;display:flex;align-items:center;justify-content:space-between;}
-    .logo{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;
-      letter-spacing:5px;text-decoration:none;
+    .logo{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;letter-spacing:5px;text-decoration:none;
       background:linear-gradient(135deg,var(--g1) 0%,var(--g2) 35%,var(--g3) 65%,var(--g5) 100%);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      filter:drop-shadow(0 0 16px var(--gg));}
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 16px var(--gg));}
     .nav-links{display:flex;gap:38px;list-style:none;}
     .nav-links a{font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--mu);
       text-decoration:none;letter-spacing:3px;text-transform:uppercase;transition:color .3s;}
@@ -59,24 +61,24 @@
     .nav-dot{display:flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;
       font-size:.57rem;letter-spacing:2px;color:var(--grn);
       border:1px solid rgba(42,219,138,0.2);padding:6px 14px;border-radius:2px;}
-    .dot{width:5px;height:5px;border-radius:50%;background:var(--grn);box-shadow:0 0 8px var(--grn);animation:pd 2s ease-in-out infinite;}
+    .dot{width:5px;height:5px;border-radius:50%;background:var(--grn);
+      box-shadow:0 0 8px var(--grn);animation:pd 2s ease-in-out infinite;}
     @keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
 
+    /* WRAP */
     .wrap{position:relative;z-index:3;max-width:1200px;margin:0 auto;padding:0 44px;}
-    section{padding:110px 0;position:relative;z-index:3;}
 
     /* HERO */
-    #hero{min-height:100vh;display:flex;align-items:center;padding:130px 0 90px;}
+    #hero{min-height:100vh;display:flex;align-items:center;padding:130px 0 90px;position:relative;z-index:3;}
     .hgrid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center;}
     .hname{font-family:'Orbitron',sans-serif;font-size:clamp(3.5rem,6.5vw,6.2rem);
       font-weight:900;line-height:.92;letter-spacing:4px;animation:fu .9s ease both .2s;}
-    .hname .l1{display:block;color:var(--pt1);}
+    .hname .l1{display:block;color:var(--pt1);text-shadow:0 0 50px rgba(240,240,248,0.07);}
     .hname .l2{display:block;font-size:clamp(1.5rem,2.8vw,2.6rem);letter-spacing:8px;
       font-weight:400;margin-top:8px;
       background:linear-gradient(90deg,var(--g5) 0%,var(--g3) 25%,var(--g2) 50%,var(--g3) 75%,var(--g5) 100%);
       background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      filter:drop-shadow(0 0 18px var(--gg));
-      animation:fu .9s ease both .2s,gsm 5s ease-in-out infinite 2s;}
+      filter:drop-shadow(0 0 18px var(--gg));animation:fu .9s ease both .2s,gsm 5s ease-in-out infinite 2s;}
     @keyframes gsm{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
     .hdiv{display:flex;align-items:center;gap:16px;margin:28px 0;animation:fu .6s ease both .4s;}
     .hl{height:1px;flex:1;}
@@ -96,12 +98,13 @@
     .btn-o{padding:15px 34px;font-family:'Orbitron',sans-serif;font-size:.63rem;font-weight:700;
       letter-spacing:3px;text-transform:uppercase;text-decoration:none;border-radius:2px;cursor:pointer;
       background:transparent;color:var(--g3);border:1px solid var(--bdg);transition:all .3s;}
-    .btn-o:hover{background:var(--gbg);color:var(--g2);}
+    .btn-o:hover{background:var(--gbg);box-shadow:0 0 24px rgba(232,184,75,0.1);color:var(--g2);}
 
     /* TERMINAL */
     .term{background:linear-gradient(145deg,rgba(12,9,4,0.97),rgba(8,8,12,0.98));
       border:1px solid var(--bdr);border-radius:6px;overflow:hidden;
-      box-shadow:0 40px 100px rgba(0,0,0,0.8);animation:fu 1.1s ease both .5s;}
+      box-shadow:0 40px 100px rgba(0,0,0,0.8),0 0 0 1px rgba(232,184,75,0.05);
+      animation:fu 1.1s ease both .5s;}
     .term::before{content:'';display:block;height:1px;
       background:linear-gradient(90deg,transparent,var(--g4) 30%,var(--g3) 50%,var(--g4) 70%,transparent);}
     .tbar{background:rgba(6,4,2,0.96);padding:13px 20px;display:flex;align-items:center;gap:8px;
@@ -111,15 +114,17 @@
     .ttitle{font-family:'Share Tech Mono',monospace;font-size:.57rem;letter-spacing:2px;color:var(--mu);margin-left:8px;}
     .tbody{padding:24px 22px;}
     .tl{font-family:'Share Tech Mono',monospace;font-size:.71rem;line-height:2.1;}
-    .tp{color:var(--g3)}.tgv{color:var(--g2)}.tc{color:var(--pt1)}.to{color:var(--mu)}.tok{color:var(--grn)}
+    .tp{color:var(--g3);}.tgv{color:var(--g2);}.tc{color:var(--pt1);}
+    .to{color:var(--mu);}.tok{color:var(--grn);}
     .blk{display:inline-block;width:7px;height:13px;background:var(--g3);
       margin-left:2px;animation:blk 1s step-end infinite;vertical-align:middle;box-shadow:0 0 10px var(--gg);}
     @keyframes blk{50%{opacity:0}}
 
-    /* SECTION COMMONS */
+    /* SECTIONS */
+    section{padding:110px 0;position:relative;z-index:3;}
     .slabel{font-family:'Share Tech Mono',monospace;font-size:.57rem;letter-spacing:4px;
       text-transform:uppercase;color:var(--g3);display:flex;align-items:center;gap:12px;margin-bottom:16px;}
-    .slabel::before{content:'◆';font-size:.38rem;color:var(--g4);}
+    .slabel::before{content:'\25C6';font-size:.38rem;color:var(--g4);}
     .slabel::after{content:'';flex:0 0 44px;height:1px;background:linear-gradient(90deg,var(--bdg),transparent);}
     .stitle{font-family:'Orbitron',sans-serif;font-weight:700;
       font-size:clamp(1.9rem,3.5vw,2.8rem);letter-spacing:3px;
@@ -129,7 +134,7 @@
     .stitle .pa{color:var(--pt2);}
     .ldiv{position:relative;z-index:3;height:1px;width:100%;
       background:linear-gradient(90deg,transparent,rgba(232,184,75,0.12) 15%,var(--bdg) 35%,var(--g3) 50%,var(--bdg) 65%,rgba(232,184,75,0.12) 85%,transparent);}
-    .ldiv::before{content:'◆';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    .ldiv::before{content:'\25C6';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
       font-size:.42rem;color:var(--g2);background:var(--ob1);padding:0 12px;text-shadow:0 0 14px var(--gg);}
 
     /* ABOUT */
@@ -143,7 +148,8 @@
     .hcell::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
       background:linear-gradient(90deg,transparent,var(--g3),transparent);
       transform:scaleX(0);transform-origin:left;transition:transform .5s;}
-    .hcell:hover{border-color:rgba(232,184,75,0.3);}.hcell:hover::before{transform:scaleX(1);}
+    .hcell:hover{border-color:rgba(232,184,75,0.3);}
+    .hcell:hover::before{transform:scaleX(1);}
     .hkey{font-family:'Share Tech Mono',monospace;font-size:.54rem;letter-spacing:3px;color:var(--g4);text-transform:uppercase;margin-bottom:10px;}
     .hval{font-family:'Orbitron',sans-serif;font-size:1.65rem;font-weight:700;color:var(--pt1);line-height:1;}
     .hval.gv{background:linear-gradient(135deg,var(--g2),var(--g3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
@@ -164,15 +170,14 @@
     .pcard:hover .pidx{color:rgba(232,184,75,0.16);}
     .ptag{display:inline-flex;align-items:center;gap:6px;margin-bottom:14px;
       padding:5px 13px;border-radius:2px;font-family:'Share Tech Mono',monospace;
-      font-size:.55rem;letter-spacing:2px;text-transform:uppercase;border:1px solid;}
-    .ptag::before{content:'◆';font-size:.34rem;opacity:.7;}
+      font-size:.55rem;letter-spacing:2px;text-transform:uppercase;border:1px solid;transition:all .3s;}
+    .ptag::before{content:'\25C6';font-size:.34rem;opacity:.7;}
     .ptag.tg{color:var(--g3);border-color:rgba(232,184,75,0.24);background:rgba(232,184,75,0.05);}
     .live{display:inline-flex;align-items:center;gap:6px;margin-bottom:14px;
       font-family:'Share Tech Mono',monospace;font-size:.54rem;letter-spacing:2px;
       color:var(--grn);border:1px solid rgba(42,219,138,0.2);padding:4px 11px;border-radius:2px;}
     .ldot{width:4px;height:4px;border-radius:50%;background:var(--grn);box-shadow:0 0 6px var(--grn);animation:pd 2s ease-in-out infinite;}
-    .pname{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;
-      color:var(--pt1);margin-bottom:12px;letter-spacing:1px;line-height:1.25;}
+    .pname{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;color:var(--pt1);margin-bottom:12px;letter-spacing:1px;line-height:1.25;}
     .pdesc{font-size:.76rem;color:var(--mu);line-height:1.95;margin-bottom:24px;font-weight:300;}
     .pstack{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:26px;}
     .chip{font-family:'Share Tech Mono',monospace;font-size:.53rem;letter-spacing:1px;
@@ -180,8 +185,9 @@
     .pcard:hover .chip{border-color:rgba(232,184,75,0.22);color:var(--g4);}
     .plink{display:inline-flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;
       font-size:.61rem;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:gap .3s,color .3s;}
-    .plink::after{content:'→';}
-    .plink.lg{color:var(--g3);}.plink.lg:hover{color:var(--g2);gap:14px;}
+    .plink::after{content:'\2192';}
+    .plink.lg{color:var(--g3);}
+    .plink.lg:hover{color:var(--g2);gap:14px;}
 
     /* BLOG */
     #blog{background:linear-gradient(180deg,var(--ob2) 0%,var(--ob1) 100%);border-top:1px solid var(--bdr);}
@@ -200,13 +206,48 @@
     .btag{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:.53rem;
       letter-spacing:2px;text-transform:uppercase;color:var(--pt2);
       border:1px solid rgba(176,180,204,0.2);padding:3px 10px;border-radius:2px;margin-bottom:14px;}
-    .btitle{font-family:'Orbitron',sans-serif;font-size:.94rem;font-weight:700;
-      color:var(--pt1);margin-bottom:12px;letter-spacing:1px;line-height:1.4;}
+    .btitle{font-family:'Orbitron',sans-serif;font-size:.94rem;font-weight:700;color:var(--pt1);margin-bottom:12px;letter-spacing:1px;line-height:1.4;}
     .bexcerpt{font-size:.76rem;color:var(--mu);line-height:1.9;font-weight:300;margin-bottom:20px;}
     .bread{font-family:'Share Tech Mono',monospace;font-size:.59rem;letter-spacing:2px;
       color:var(--g3);display:flex;align-items:center;gap:8px;transition:gap .3s,color .3s;}
-    .bread::after{content:'→';}
+    .bread::after{content:'\2192';}
     .bcard:hover .bread{gap:14px;color:var(--g2);}
+
+    /* MODAL */
+    .moverlay{display:none;position:fixed;inset:0;z-index:1000;
+      background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);
+      overflow-y:auto;padding:40px 20px;}
+    .moverlay.open{display:flex;justify-content:center;align-items:flex-start;animation:fadeIn .3s ease;}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .mbox{background:linear-gradient(145deg,rgba(14,10,4,0.99),rgba(8,8,14,0.99));
+      border:1px solid var(--bdg);border-radius:6px;max-width:760px;width:100%;position:relative;
+      box-shadow:0 0 0 1px rgba(232,184,75,0.06),0 40px 120px rgba(0,0,0,0.9);
+      animation:slideUp .35s cubic-bezier(.16,1,.3,1);}
+    .mbox::before{content:'';display:block;height:2px;border-radius:6px 6px 0 0;
+      background:linear-gradient(90deg,transparent,var(--g4) 25%,var(--g2) 50%,var(--g4) 75%,transparent);}
+    @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .mhead{padding:32px 40px 24px;border-bottom:1px solid var(--bdr);}
+    .mtag{font-family:'Share Tech Mono',monospace;font-size:.55rem;letter-spacing:3px;
+      text-transform:uppercase;color:var(--g3);margin-bottom:14px;}
+    .mtitle{font-family:'Orbitron',sans-serif;font-size:clamp(1.1rem,2.5vw,1.6rem);
+      font-weight:700;color:var(--pt1);letter-spacing:1px;line-height:1.3;margin-bottom:14px;}
+    .mdate{font-family:'Share Tech Mono',monospace;font-size:.57rem;letter-spacing:2px;color:var(--mu);}
+    .mbody{padding:32px 40px 40px;}
+    .mbody p{font-size:.88rem;color:var(--tx);line-height:2.0;margin-bottom:20px;font-weight:300;}
+    .mbody p strong{color:var(--tx2);font-weight:500;}
+    .mbody h3{font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;
+      color:var(--g3);letter-spacing:2px;text-transform:uppercase;margin:28px 0 14px;}
+    .mbody ul{list-style:none;margin-bottom:20px;}
+    .mbody ul li{font-size:.86rem;color:var(--tx);line-height:1.9;
+      padding:6px 0 6px 20px;position:relative;font-weight:300;}
+    .mbody ul li::before{content:'\25C6';position:absolute;left:0;font-size:.35rem;color:var(--g3);top:13px;}
+    .mbody .cb{background:rgba(4,6,10,0.95);border:1px solid var(--bdr);border-left:2px solid var(--g3);
+      padding:16px 20px;border-radius:3px;margin:16px 0 20px;
+      font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--g2);line-height:1.9;overflow-x:auto;}
+    .mclose{position:absolute;top:18px;right:20px;font-family:'Share Tech Mono',monospace;
+      font-size:.58rem;letter-spacing:2px;color:var(--mu);cursor:pointer;
+      border:1px solid var(--bdr);padding:6px 14px;border-radius:2px;background:transparent;transition:all .3s;cursor:pointer;}
+    .mclose:hover{color:var(--g3);border-color:var(--bdg);}
 
     /* CONTACT */
     #contact{background:var(--ob2);border-top:1px solid var(--bdr);}
@@ -231,15 +272,15 @@
     .field input:focus,.field textarea:focus{border-color:rgba(232,184,75,0.4);box-shadow:0 0 22px rgba(232,184,75,0.07);}
     .field input::placeholder,.field textarea::placeholder{color:var(--mu2);}
     .field textarea{min-height:120px;}
-    .fsub{padding:16px;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.63rem;
-      letter-spacing:3px;text-transform:uppercase;
+    .fsub{padding:16px;cursor:pointer;font-family:'Orbitron',sans-serif;font-weight:700;font-size:.63rem;
+      letter-spacing:3px;text-transform:uppercase;cursor:none;
       background:linear-gradient(135deg,var(--g1) 0%,var(--g2) 30%,var(--g3) 65%,var(--g5) 100%);
-      color:var(--ob1);border:none;border-radius:2px;cursor:pointer;
+      color:var(--ob1);border:none;border-radius:2px;
       box-shadow:0 4px 30px var(--gg),inset 0 1px 0 rgba(255,240,180,0.2);transition:transform .3s,box-shadow .3s;}
     .fsub:hover{transform:translateY(-2px);box-shadow:0 12px 48px var(--gg);}
-    .fsuccess{display:none;padding:16px;text-align:center;background:rgba(42,219,138,0.04);
-      border:1px solid rgba(42,219,138,0.2);font-family:'Share Tech Mono',monospace;
-      font-size:.64rem;color:var(--grn);letter-spacing:2px;}
+    .fsuccess{display:none;padding:16px;text-align:center;
+      background:rgba(42,219,138,0.04);border:1px solid rgba(42,219,138,0.2);
+      font-family:'Share Tech Mono',monospace;font-size:.64rem;color:var(--grn);letter-spacing:2px;}
 
     /* FOOTER */
     footer{border-top:1px solid var(--bdr);padding:40px 0;text-align:center;position:relative;z-index:3;background:var(--ob1);}
@@ -251,50 +292,20 @@
     .fcopy{font-family:'Share Tech Mono',monospace;font-size:.56rem;letter-spacing:3px;color:var(--mu2);}
     .fcopy span{color:var(--g4);}
 
-    /* MODAL */
-    .modal-overlay{display:none;position:fixed;inset:0;z-index:1000;
-      background:rgba(0,0,0,0.93);backdrop-filter:blur(14px);
-      overflow-y:auto;padding:40px 20px;}
-    .modal-overlay.open{display:flex;justify-content:center;align-items:flex-start;}
-    .modal-box{background:linear-gradient(145deg,rgba(14,10,4,0.99),rgba(8,8,14,0.99));
-      border:1px solid var(--bdg);border-radius:6px;max-width:760px;width:100%;
-      position:relative;box-shadow:0 0 0 1px rgba(232,184,75,0.06),0 40px 120px rgba(0,0,0,0.9);
-      animation:slideUp .35s cubic-bezier(.16,1,.3,1);}
-    .modal-box::before{content:'';display:block;height:2px;border-radius:6px 6px 0 0;
-      background:linear-gradient(90deg,transparent,var(--g4) 25%,var(--g2) 50%,var(--g4) 75%,transparent);}
-    @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-    .modal-header{padding:32px 40px 24px;border-bottom:1px solid var(--bdr);}
-    .modal-tag{font-family:'Share Tech Mono',monospace;font-size:.55rem;letter-spacing:3px;
-      text-transform:uppercase;color:var(--g3);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-    .modal-tag::before{content:'◆';font-size:.35rem;color:var(--g4);}
-    .modal-title{font-family:'Orbitron',sans-serif;font-size:clamp(1.1rem,2.5vw,1.6rem);
-      font-weight:700;color:var(--pt1);letter-spacing:1px;line-height:1.3;margin-bottom:14px;}
-    .modal-date{font-family:'Share Tech Mono',monospace;font-size:.57rem;letter-spacing:2px;color:var(--mu);}
-    .modal-body{padding:32px 40px 40px;}
-    .modal-body p{font-size:.88rem;color:var(--tx);line-height:2.0;margin-bottom:20px;font-weight:300;}
-    .modal-body p strong{color:var(--tx2);font-weight:500;}
-    .modal-body h3{font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;
-      color:var(--g3);letter-spacing:2px;text-transform:uppercase;margin:28px 0 14px;}
-    .modal-body ul{list-style:none;margin-bottom:20px;}
-    .modal-body ul li{font-size:.86rem;color:var(--tx);line-height:1.9;
-      padding:6px 0 6px 22px;position:relative;font-weight:300;}
-    .modal-body ul li::before{content:'◆';position:absolute;left:0;font-size:.35rem;color:var(--g3);top:13px;}
-    .modal-body .cb{background:rgba(4,6,10,0.95);border:1px solid var(--bdr);
-      border-left:2px solid var(--g3);padding:16px 20px;border-radius:3px;margin:16px 0 20px;
-      font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--g2);line-height:1.9;overflow-x:auto;}
-    .modal-close{position:absolute;top:18px;right:20px;font-family:'Share Tech Mono',monospace;
-      font-size:.58rem;letter-spacing:2px;color:var(--mu);cursor:pointer;
-      border:1px solid var(--bdr);padding:6px 14px;border-radius:2px;background:transparent;transition:all .3s;}
-    .modal-close:hover{color:var(--g3);border-color:var(--bdg);}
-
+    /* SCROLLBAR */
     ::-webkit-scrollbar{width:3px;}
     ::-webkit-scrollbar-track{background:var(--ob1);}
     ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--g2),var(--g4));border-radius:2px;}
+
     @keyframes fu{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+
     @media(max-width:900px){
       .hgrid,.agrid,.pgrid,.cgrid{grid-template-columns:1fr;}
-      .bgrid{grid-template-columns:1fr;}.term{display:none;}
-      .nav-links{display:none;}.frow{grid-template-columns:1fr;}}
+      .bgrid{grid-template-columns:1fr;}
+      .term{display:none;}
+      .nav-links{display:none;}
+      .frow{grid-template-columns:1fr;}
+    }
   </style>
 </head>
 <body>
@@ -302,7 +313,7 @@
 <div class="grid"></div>
 <div class="grain"></div>
 <div class="shimmer"></div>
-<div id="cg"></div>
+<canvas id="trail"></canvas>
 
 <nav>
   <div class="ni">
@@ -334,14 +345,14 @@
         <div class="tbody">
           <div class="tl"><span class="tp">tirth@dev</span>:<span class="tgv">~</span>$ <span class="tc">./boot.sh</span></div>
           <div class="tl"><span class="to">  Initializing...</span></div>
-          <div class="tl"><span class="tok">  ✓ NAME     </span><span class="tgv">Tirth</span></div>
-          <div class="tl"><span class="tok">  ✓ AGE      </span><span class="tgv">13</span></div>
-          <div class="tl"><span class="tok">  ✓ LOCATION </span><span class="tgv">India</span></div>
-          <div class="tl"><span class="tok">  ✓ STACK    </span><span class="tgv">Python · Flask · AI</span></div>
-          <div class="tl"><span class="tok">  ✓ PROJECTS </span><span class="tgv">2 LIVE on Render</span></div>
-          <div class="tl"><span class="to">  ─────────────────────────</span></div>
+          <div class="tl"><span class="tok">  &#10003; NAME &nbsp;&nbsp;&nbsp;&nbsp; </span><span class="tgv">Tirth</span></div>
+          <div class="tl"><span class="tok">  &#10003; AGE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="tgv">13</span></div>
+          <div class="tl"><span class="tok">  &#10003; LOCATION  </span><span class="tgv">India &#127470;&#127475;</span></div>
+          <div class="tl"><span class="tok">  &#10003; STACK &nbsp;&nbsp;&nbsp; </span><span class="tgv">Python &middot; Flask &middot; AI</span></div>
+          <div class="tl"><span class="tok">  &#10003; PROJECTS  </span><span class="tgv">2 LIVE on Render</span></div>
+          <div class="tl"><span class="to">  &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span></div>
           <div class="tl"><span class="tp">tirth@dev</span>:<span class="tgv">~</span>$ <span class="tc">ping world</span></div>
-          <div class="tl"><span class="tok">  Ready to build 🚀</span></div>
+          <div class="tl"><span class="tok">  Ready to build &#128640;</span></div>
           <div class="tl"><span class="tp">tirth@dev</span>:<span class="tgv">~</span>$ <span class="blk"></span></div>
         </div>
       </div>
@@ -359,7 +370,7 @@
         <h2 class="stitle">Young. <span class="ga">Wired.</span><br>Always <span class="pa">Shipping.</span></h2>
         <div class="about-text">
           <p>I'm <strong>Tirth</strong>, a 13-year-old developer from India who discovered the best way to learn is to <strong>build real things and put them on the internet</strong>.</p>
-          <p>While most kids my age were playing games, I was shipping <strong>AI-powered web apps deployed on Render</strong> — a full data visualizer and a cinematic 3D cyberpunk prompt gallery.</p>
+          <p>While most kids my age were playing games, I was shipping <strong>AI-powered web apps deployed on Render</strong> &mdash; a full data visualizer and a cinematic 3D cyberpunk prompt gallery.</p>
           <p>I love the full stack: beautiful frontends, solid Python backends, data science, and making AI do interesting things. My code philosophy: <strong>if it's not deployed, it doesn't exist</strong>.</p>
           <p>My goal? Keep building, keep shipping, and eventually work on products that <strong>millions of people use</strong>.</p>
         </div>
@@ -368,7 +379,7 @@
         <div class="hud">
           <div class="hcell"><div class="hkey">PROJECTS</div><div class="hval gv">2</div><div class="hsub">Live &amp; deployed</div></div>
           <div class="hcell"><div class="hkey">AGE</div><div class="hval">13</div><div class="hsub">Years on Earth</div></div>
-          <div class="hcell"><div class="hkey">LOCATION</div><div class="hval" style="font-size:1rem;letter-spacing:1px;">INDIA</div><div class="hsub">Building from 🇮🇳</div></div>
+          <div class="hcell"><div class="hkey">LOCATION</div><div class="hval" style="font-size:1rem;letter-spacing:1px;">INDIA</div><div class="hsub">Building from &#127470;&#127475;</div></div>
           <div class="hcell"><div class="hkey">STATUS</div><div class="hval gv" style="font-size:1rem;letter-spacing:1px;">ONLINE</div><div class="hsub">Always building</div></div>
         </div>
       </div>
@@ -386,19 +397,23 @@
       <div class="pcard">
         <div class="pidx">01</div>
         <div class="live"><span class="ldot"></span>LIVE</div>
-        <span class="ptag tg">Data · AI · Streamlit</span>
+        <span class="ptag tg">Data &middot; AI &middot; Streamlit</span>
         <div class="pname">NextGen AI Visualizer</div>
-        <p class="pdesc">Upload any CSV — get stunning interactive charts with an AI insight engine that auto-analyzes trends, peaks, volatility and skew. Premium glass-morphism UI with animated transitions.</p>
-        <div class="pstack"><span class="chip">Python</span><span class="chip">Streamlit</span><span class="chip">Plotly</span><span class="chip">Pandas</span><span class="chip">Render</span></div>
+        <p class="pdesc">Upload any CSV &mdash; get stunning interactive charts with an AI insight engine that auto-analyzes trends, peaks, volatility and skew. Premium glass-morphism UI with animated transitions.</p>
+        <div class="pstack">
+          <span class="chip">Python</span><span class="chip">Streamlit</span><span class="chip">Plotly</span><span class="chip">Pandas</span><span class="chip">Render</span>
+        </div>
         <a href="https://nextgen-ai-data-visualizer-1.onrender.com" target="_blank" class="plink lg">View Live App</a>
       </div>
       <div class="pcard">
         <div class="pidx">02</div>
         <div class="live"><span class="ldot"></span>LIVE</div>
-        <span class="ptag tg">Flask · Three.js · 3D</span>
+        <span class="ptag tg">Flask &middot; Three.js &middot; 3D</span>
         <div class="pname">Tirth's Prompt Garage</div>
-        <p class="pdesc">Cyberpunk AI prompt gallery with a live 3D city backdrop — rain particles, moving vehicles, cursor-tracking searchlight and full prompt management with dev authentication.</p>
-        <div class="pstack"><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">Three.js</span><span class="chip">HTML/CSS/JS</span><span class="chip">Render</span></div>
+        <p class="pdesc">Cyberpunk AI prompt gallery with a live 3D city backdrop &mdash; rain particles, moving vehicles, cursor-tracking searchlight and full prompt management with dev authentication.</p>
+        <div class="pstack">
+          <span class="chip">Python</span><span class="chip">Flask</span><span class="chip">Three.js</span><span class="chip">HTML/CSS/JS</span><span class="chip">Render</span>
+        </div>
         <a href="https://prompt-garage.onrender.com" target="_blank" class="plink lg">View Live App</a>
       </div>
     </div>
@@ -416,14 +431,14 @@
         <div class="bdate">2026-06-10</div>
         <span class="btag">DEVLOG #001</span>
         <div class="btitle">How I Built a 3D City in the Browser at Age 13</div>
-        <p class="bexcerpt">I wanted Prompt Garage to feel cinematic. So I learned Three.js from scratch — buildings, rain, vehicles, a searchlight. Here's exactly how I did it and what broke.</p>
+        <p class="bexcerpt">I wanted Prompt Garage to feel cinematic. So I learned Three.js from scratch &mdash; buildings, rain, vehicles, a searchlight. Here's exactly how I did it.</p>
         <div class="bread">Read Post</div>
       </div>
       <div class="bcard" data-article="1">
         <div class="bdate">2026-05-28</div>
         <span class="btag">DEVLOG #002</span>
         <div class="btitle">Building an AI Data Visualizer with Streamlit &amp; Plotly</div>
-        <p class="bexcerpt">Why just show charts when AI can explain what they mean? I built an insight engine that auto-detects volatility, trends and skew — pure math, no ML library needed.</p>
+        <p class="bexcerpt">Why just show charts when AI can explain what they mean? I built an insight engine that auto-detects volatility, trends and skew &mdash; pure math, no ML library needed.</p>
         <div class="bread">Read Post</div>
       </div>
       <div class="bcard" data-article="2">
@@ -436,7 +451,7 @@
       <div class="bcard" data-article="3">
         <div class="bdate">2026-06-22</div>
         <span class="btag">DEVLOG #004</span>
-        <div class="btitle">Deploying Flask Apps to Render — A Complete Guide</div>
+        <div class="btitle">Deploying Flask Apps to Render &mdash; A Complete Guide</div>
         <p class="bexcerpt">Render is my favourite way to put Python apps on the internet for free. Here's my exact workflow from localhost to live URL in under 10 minutes.</p>
         <div class="bread">Read Post</div>
       </div>
@@ -452,11 +467,11 @@
       <div>
         <div class="slabel">04_contact</div>
         <h2 class="stitle">Let's <span class="ga">Connect.</span></h2>
-        <p style="font-size:.85rem;color:var(--mu);line-height:2;font-weight:300;">Have a project idea? Want to collaborate?<br>Know a cool AI tool I should build?<br>Or just want to say hi — I'm here.</p>
+        <p style="font-size:.85rem;color:var(--mu);line-height:2;font-weight:300;">Have a project idea? Want to collaborate?<br>Know a cool AI tool I should build?<br>Or just want to say hi &mdash; I'm here.</p>
         <div class="socrow">
-          <a href="https://github.com/tirth-ai" target="_blank" class="socitem"><span class="socicon">GITHUB</span><span class="sochandle">@tirth-ai</span><span class="socarrow">→</span></a>
-          <a href="https://twitter.com/Tirth_Tech" target="_blank" class="socitem"><span class="socicon">TWITTER</span><span class="sochandle">@Tirth_Tech</span><span class="socarrow">→</span></a>
-          <a href="/cdn-cgi/l/email-protection#7c0c1d08191008150e08144a4c44443c1b111d1510521f1311" class="socitem"><span class="socicon">EMAIL</span><span class="sochandle">pateltirth6088&#64;gmail.com</span><span class="socarrow">→</span></a>
+          <a href="https://github.com/tirth-ai" target="_blank" class="socitem"><span class="socicon">GITHUB</span><span class="sochandle">@tirth-ai</span><span class="socarrow">&#8594;</span></a>
+          <a href="https://twitter.com/Tirth_Tech" target="_blank" class="socitem"><span class="socicon">TWITTER</span><span class="sochandle">@Tirth_Tech</span><span class="socarrow">&#8594;</span></a>
+          <a href="mailto:pateltirth6088@gmail.com" class="socitem"><span class="socicon">EMAIL</span><span class="sochandle">pateltirth6088@gmail.com</span><span class="socarrow">&#8594;</span></a>
         </div>
       </div>
       <div>
@@ -467,8 +482,8 @@
           </div>
           <div class="field"><label>Subject</label><input type="text" placeholder="What's on your mind?"></div>
           <div class="field"><label>Message</label><textarea placeholder="Tell me about your idea or just say hi..."></textarea></div>
-          <button type="submit" class="fsub">◆ SEND MESSAGE</button>
-          <div class="fsuccess" id="fsuccess">✓ MESSAGE RECEIVED — I'LL GET BACK TO YOU SOON</div>
+          <button type="submit" class="fsub">&#9670; SEND MESSAGE</button>
+          <div class="fsuccess" id="fsuccess">&#10003; MESSAGE RECEIVED &mdash; I'LL GET BACK TO YOU SOON</div>
         </form>
       </div>
     </div>
@@ -478,263 +493,221 @@
 <footer>
   <div class="wrap">
     <div class="flogo">Tirth's Portfolio</div>
-    <div class="fcopy">Built by <span>Tirth</span> · Age 13 · India 🇮🇳 · 2025 · <span>All Systems Online</span></div>
+    <div class="fcopy">Built by <span>Tirth</span> &middot; Age 13 &middot; India &#127470;&#127475; &middot; 2026 &middot; <span>All Systems Online</span></div>
   </div>
 </footer>
 
 <!-- ARTICLE MODAL -->
-<div class="modal-overlay" id="articleModal">
-  <div class="modal-box">
-    <button class="modal-close" id="modalClose">✕ CLOSE</button>
-    <div class="modal-header">
-      <div class="modal-tag" id="mTag"></div>
-      <div class="modal-title" id="mTitle"></div>
-      <div class="modal-date" id="mDate"></div>
+<div class="moverlay" id="articleModal">
+  <div class="mbox">
+    <button class="mclose" id="modalClose">&#10005; CLOSE</button>
+    <div class="mhead">
+      <div class="mtag" id="mTag"></div>
+      <div class="mtitle" id="mTitle"></div>
+      <div class="mdate" id="mDate"></div>
     </div>
-    <div class="modal-body" id="mBody"></div>
+    <div class="mbody" id="mBody"></div>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+// ═══════════════════════════════════════
+//  CURSOR TRAIL
+// ═══════════════════════════════════════
+(function(){
+  var canvas = document.getElementById('trail');
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width  = window.innerWidth;
+  var H = canvas.height = window.innerHeight;
+  window.addEventListener('resize', function(){
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  });
+  var pts = [];
+  var MAX = 24;
+  document.addEventListener('mousemove', function(e){
+    pts.push({ x: e.clientX, y: e.clientY, life: 1.0 });
+    if(pts.length > MAX) pts.shift();
+  });
+  function loop(){
+    ctx.clearRect(0, 0, W, H);
+    for(var i = 0; i < pts.length; i++) pts[i].life -= 0.038;
+    if(pts.length >= 2){
+      for(var i = 1; i < pts.length; i++){
+        var p1 = pts[i-1], p2 = pts[i];
+        var t = i / pts.length;
+        var alpha = Math.max(0, p2.life) * t * 1.0;
+
+        // Outer glow stroke (broad, soft)
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = 'rgba(201,147,42,' + (alpha * 0.35) + ')';
+        ctx.lineWidth   = t * 18;
+        ctx.lineCap     = 'round';
+        ctx.lineJoin    = 'round';
+        ctx.stroke();
+
+        // Mid glow stroke
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = 'rgba(232,184,75,' + (alpha * 0.7) + ')';
+        ctx.lineWidth   = t * 9;
+        ctx.lineCap     = 'round';
+        ctx.lineJoin    = 'round';
+        ctx.stroke();
+
+        // Bright core
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.strokeStyle = 'rgba(255,217,102,' + (alpha * 0.95) + ')';
+        ctx.lineWidth   = t * 3.5;
+        ctx.lineCap     = 'round';
+        ctx.lineJoin    = 'round';
+        ctx.stroke();
+      }
+      // Bright tip glow
+      var tip = pts[pts.length-1];
+      var grd = ctx.createRadialGradient(tip.x,tip.y,0,tip.x,tip.y,16);
+      grd.addColorStop(0,   'rgba(255,225,110,0.75)');
+      grd.addColorStop(0.35,'rgba(232,184,75, 0.40)');
+      grd.addColorStop(0.7, 'rgba(201,147,42, 0.15)');
+      grd.addColorStop(1,   'rgba(201,147,42, 0)');
+      ctx.beginPath();
+      ctx.arc(tip.x, tip.y, 16, 0, Math.PI*2);
+      ctx.fillStyle = grd;
+      ctx.fill();
+    }
+    for(var i = pts.length-1; i >= 0; i--){
+      if(pts[i].life <= 0) pts.splice(i,1);
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+// ═══════════════════════════════════════
+//  ARTICLES
+// ═══════════════════════════════════════
 var ARTICLES = [
   {
-    tag:"DEVLOG #001",
-    title:"How I Built a 3D City in the Browser at Age 13",
-    date:"June 10, 2026",
-    body:"<p>When I started building <strong>Prompt Garage</strong>, I had one goal: make it feel like you are stepping into a cyberpunk movie. A static page was not going to cut it. I needed a living, breathing 3D world in the background.</p><p>So I opened the <strong>Three.js docs</strong> and started reading. I had never used 3D graphics before. Here is exactly what I built and how I did it.</p><h3>The City</h3><p>The city is made of hundreds of <strong>BoxGeometry</strong> objects arranged in a grid. Each building has a random height so it looks organic. I added window meshes with <strong>MeshBasicMaterial</strong> and gave them a flicker animation — some windows turn off and on randomly, like real city lights at night.</p><div class=\"cb\">const building = new THREE.Mesh(<br>&nbsp;&nbsp;new THREE.BoxGeometry(w, height, d),<br>&nbsp;&nbsp;new THREE.MeshBasicMaterial({ color: 0x001a26 })<br>);<br>scene.add(building);</div><h3>The Rain</h3><p>Rain is just 1,400 tiny points using <strong>THREE.Points</strong> with a <strong>BufferGeometry</strong>. Each frame I move every point down by its speed value. When a point hits the ground, it resets to the top at a random X/Z position. Simple but looks amazing.</p><h3>The Searchlight</h3><p>This was the hardest part. I used a <strong>SpotLight</strong> that tracks the mouse position. I convert mouse coordinates to 3D world space and update the light target every frame. The cone mesh rotates to always point toward the target.</p><h3>What Broke</h3><ul><li>The first version crashed the browser tab — too many geometries. Fixed by merging static meshes.</li><li>The rain was too opaque and covered everything. Reduced opacity to 0.3.</li><li>The searchlight flickered on mobile. Added a check to skip the update on touch devices.</li></ul><p>The whole 3D scene runs in a single <strong>requestAnimationFrame</strong> loop. If you are 13 and think Three.js is too hard — it is not. Just start with a cube, then add one thing at a time.</p>"
+    tag:'DEVLOG #001', date:'June 10, 2026',
+    title:'How I Built a 3D City in the Browser at Age 13',
+    body:'<p>When I started building <strong>Prompt Garage</strong>, I had one goal: make it feel like you are stepping into a cyberpunk movie. A static page was not going to cut it.</p><h3>The City</h3><p>The city is made of hundreds of <strong>BoxGeometry</strong> objects arranged in a grid. Each building has a random height. I added window meshes and gave them a flicker animation &mdash; some windows turn off and on randomly, like real city lights at night.</p><div class="cb">const building = new THREE.Mesh(<br>&nbsp;&nbsp;new THREE.BoxGeometry(w, height, d),<br>&nbsp;&nbsp;new THREE.MeshBasicMaterial({ color: 0x001a26 })<br>);<br>scene.add(building);</div><h3>The Rain</h3><p>Rain is 1,400 tiny points using <strong>THREE.Points</strong>. Each frame I move every point down by its speed value. When a point hits the ground it resets to the top at a random position.</p><h3>The Searchlight</h3><p>I used a <strong>SpotLight</strong> that tracks the mouse position every frame. The cone mesh rotates to always point toward the target.</p><h3>What Broke</h3><ul><li>First version crashed the browser &mdash; too many geometries. Fixed by merging static meshes.</li><li>Rain was too opaque. Reduced opacity to 0.3.</li><li>Searchlight flickered on mobile. Added a touch device check.</li></ul><p>If you are 13 and think Three.js is too hard &mdash; it is not. Just start with a cube and add one thing at a time.</p>'
   },
   {
-    tag:"DEVLOG #002",
-    title:"Building an AI Data Visualizer with Streamlit & Plotly",
-    date:"May 28, 2026",
-    body:"<p>Most data tools just show you charts. I wanted mine to <strong>explain</strong> what the chart means — automatically, without the user having to know statistics.</p><p>That is the core idea behind <strong>NextGen AI Visualizer</strong>. Upload a CSV, pick a column, and the app does not just plot it — it tells you what is happening in plain language.</p><h3>The Stack</h3><ul><li><strong>Streamlit</strong> — for the web interface. No HTML needed, just Python.</li><li><strong>Pandas</strong> — to read and process the CSV data.</li><li><strong>Plotly Express</strong> — for beautiful interactive charts.</li></ul><h3>The AI Insight Engine</h3><p>There is no actual machine learning model. The AI is pure statistics and logic. For any numeric column, I calculate the mean, median, standard deviation, and coefficient of variation, then run the numbers through if/elif conditions to generate human-readable insights.</p><div class=\"cb\">avg = series.mean()<br>median = series.median()<br>std = series.std()<br>cv = std / avg * 100<br>highest = series.max()<br>lowest = series.min()</div><h3>What I Learned</h3><ul><li>You do not need AI models to build an AI-powered tool — smart logic is enough.</li><li>Streamlit is incredibly fast for prototyping data apps.</li><li>Coefficient of variation is a great single metric for data volatility.</li></ul>"
+    tag:'DEVLOG #002', date:'May 28, 2026',
+    title:'Building an AI Data Visualizer with Streamlit & Plotly',
+    body:'<p>Most data tools just show you charts. I wanted mine to <strong>explain</strong> what the chart means &mdash; automatically, without the user needing to know statistics.</p><h3>The Stack</h3><ul><li><strong>Streamlit</strong> &mdash; web interface, no HTML needed.</li><li><strong>Pandas</strong> &mdash; read and process CSV data.</li><li><strong>Plotly Express</strong> &mdash; beautiful interactive charts.</li></ul><h3>The AI Insight Engine</h3><p>There is no machine learning model. The AI is pure statistics and logic. I calculate mean, median, std, and coefficient of variation, then run the numbers through if/elif conditions to generate human-readable insights.</p><div class="cb">avg = series.mean()<br>median = series.median()<br>std = series.std()<br>cv = std / avg * 100<br>highest = series.max()<br>lowest = series.min()</div><h3>What I Learned</h3><ul><li>You do not need AI models to build an AI-powered tool.</li><li>Streamlit is incredibly fast for prototyping.</li><li>Coefficient of variation is a great single metric for volatility.</li></ul>'
   },
   {
-    tag:"DEVLOG #003",
-    title:"Why Every Developer Needs a Personal Website",
-    date:"June 18, 2026",
-    body:"<p>Here is a question: if someone hears your name and Googles you right now — what do they find?</p><p>For most developers, the answer is nothing. Or a GitHub profile full of empty repos. Or a LinkedIn with three connections.</p><p>I realised this was my situation too. My entire internet identity was a Twitter profile with a Render link. That is it.</p><h3>Why It Matters</h3><p>Every developer, founder, recruiter, or investor you impress on the internet will Google you. It is the first thing people do. If they find nothing, you do not exist in their mind — no matter how good your actual work is.</p><p>A personal website changes everything. It is the one place on the internet that is <strong>entirely yours</strong>. No algorithm. No platform rules. Just you.</p><h3>What Your Website Should Have</h3><ul><li>Your name and what you do — immediately, above the fold.</li><li>Live links to your real projects — not GitHub repos, actual deployed apps.</li><li>A blog or devlog — writing shows you can think and communicate.</li><li>A contact form — make it easy for people to reach you.</li></ul><h3>The Tech Is Already There</h3><p>If you know HTML, CSS, and Python you already have everything you need. Flask for the backend, HTML/CSS for the frontend, Render for free hosting. You could ship it this weekend.</p><p>Your personal website is your <strong>digital passport</strong>. The sooner you have one, the sooner people can find you and reach out.</p>"
+    tag:'DEVLOG #003', date:'June 18, 2026',
+    title:'Why Every Developer Needs a Personal Website',
+    body:'<p>If someone hears your name and Googles you right now &mdash; what do they find?</p><p>For most developers: nothing. Or a GitHub profile full of empty repos.</p><h3>Why It Matters</h3><p>Every developer, founder, recruiter, or investor you impress online will Google you. If they find nothing, you do not exist in their mind &mdash; no matter how good your actual work is.</p><p>A personal website is the one place on the internet that is <strong>entirely yours</strong>. No algorithm. No platform rules. Just you.</p><h3>What Your Website Should Have</h3><ul><li>Your name and what you do &mdash; immediately, above the fold.</li><li>Live links to your real projects &mdash; not GitHub repos, actual deployed apps.</li><li>A blog or devlog &mdash; writing shows you can think and communicate.</li><li>A contact form &mdash; make it easy for people to reach you.</li></ul><h3>The Tech Is Already There</h3><p>If you know HTML, CSS, and Python you already have everything you need. Flask for the backend, Render for free hosting. You could ship it this weekend.</p><p>I am 13. I built mine. There is genuinely no excuse not to.</p>'
   },
   {
-    tag:"DEVLOG #004",
-    title:"Deploying Flask Apps to Render — A Complete Guide",
-    date:"June 22, 2026",
-    body:"<p>Render is my favourite way to put Python apps on the internet. It is free, it is fast, and once you know the workflow it takes under 10 minutes from localhost to live URL.</p><p>Here is the exact process I use for every project.</p><h3>Step 1 — Prepare Your App</h3><p>Make sure your Flask app runs locally first. Then create two files in your project root:</p><div class=\"cb\"># requirements.txt<br>flask<br>gunicorn</div><div class=\"cb\"># Procfile (no file extension)<br>web: gunicorn app:app</div><h3>Step 2 — Push to GitHub</h3><p>Create a GitHub repo and push your project to it. Render deploys directly from GitHub so every time you push, it auto-deploys.</p><div class=\"cb\">git init<br>git add .<br>git commit -m \"initial commit\"<br>git push origin main</div><h3>Step 3 — Create a Render Web Service</h3><ul><li>Go to render.com and sign up for free.</li><li>Click New then Web Service.</li><li>Connect your GitHub repo.</li><li>Build command: pip install -r requirements.txt</li><li>Start command: gunicorn app:app</li><li>Choose the free tier and click Deploy.</li></ul><h3>Common Issues</h3><ul><li><strong>Build fails</strong> — usually a missing package in requirements.txt.</li><li><strong>App crashes on start</strong> — check your Procfile module name matches your Python file.</li><li><strong>Static files not loading</strong> — use Flask url_for() for static assets.</li></ul><p>That is the entire workflow. Two files, four steps, one live URL. Ship it.</p>"
+    tag:'DEVLOG #004', date:'June 22, 2026',
+    title:'Deploying Flask Apps to Render &mdash; A Complete Guide',
+    body:'<p>Render is my favourite way to put Python apps on the internet. Free, fast, and under 10 minutes from localhost to live URL once you know the workflow.</p><h3>Step 1 &mdash; Prepare Your App</h3><p>Create two files in your project root:</p><div class="cb"># requirements.txt<br>flask<br>gunicorn</div><div class="cb"># Procfile (no file extension)<br>web: gunicorn app:app</div><h3>Step 2 &mdash; Push to GitHub</h3><div class="cb">git init<br>git add .<br>git commit -m "initial commit"<br>git push origin main</div><h3>Step 3 &mdash; Create a Render Web Service</h3><ul><li>Go to render.com and sign up for free.</li><li>Click New then Web Service and connect your GitHub repo.</li><li>Build command: <strong>pip install -r requirements.txt</strong></li><li>Start command: <strong>gunicorn app:app</strong></li><li>Choose the free tier and click Deploy.</li></ul><h3>Common Issues</h3><ul><li><strong>Build fails</strong> &mdash; missing package in requirements.txt.</li><li><strong>App crashes on start</strong> &mdash; Procfile module name does not match your Python file.</li><li><strong>Static files not loading</strong> &mdash; use Flask url_for() for static assets.</li></ul><p>Two files, four steps, one live URL. Ship it.</p>'
   }
 ];
 
-function openArticle(idx) {
+function openArticle(idx){
   var a = ARTICLES[idx];
-  document.getElementById("mTag").textContent   = a.tag;
-  document.getElementById("mTitle").textContent = a.title;
-  document.getElementById("mDate").textContent  = a.date;
-  document.getElementById("mBody").innerHTML    = a.body;
-  document.getElementById("articleModal").classList.add("open");
-  document.body.style.overflow = "hidden";
+  document.getElementById('mTag').textContent   = a.tag;
+  document.getElementById('mTitle').textContent = a.title;
+  document.getElementById('mDate').textContent  = a.date;
+  document.getElementById('mBody').innerHTML    = a.body;
+  document.getElementById('articleModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  SFX.modalOpen();
 }
-
-function closeArticle() {
-  document.getElementById("articleModal").classList.remove("open");
-  document.body.style.overflow = "";
+function closeArticle(){
+  document.getElementById('articleModal').classList.remove('open');
+  document.body.style.overflow = '';
+  SFX.modalClose();
 }
-
-function handleOverlayClick(e) {
-  if (e.target === document.getElementById("articleModal")) closeArticle();
-}
-
-// Blog card click listeners
-document.querySelectorAll(".bcard[data-article]").forEach(function(card) {
-  card.addEventListener("click", function() {
-    openArticle(parseInt(this.getAttribute("data-article")));
-  });
+document.querySelectorAll('.bcard[data-article]').forEach(function(card){
+  card.addEventListener('click', function(){ openArticle(parseInt(this.dataset.article)); });
 });
+document.getElementById('modalClose').addEventListener('click', closeArticle);
+document.getElementById('articleModal').addEventListener('click', function(e){ if(e.target===this) closeArticle(); });
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeArticle(); });
 
-// Modal close button
-document.getElementById("modalClose").addEventListener("click", closeArticle);
-
-// Close on backdrop click
-document.getElementById("articleModal").addEventListener("click", function(e) {
-  if (e.target === this) closeArticle();
-});
-
-// Close on Escape key
-document.addEventListener("keydown", function(e) {
-  if (e.key === "Escape") closeArticle();
-});
-
-// Cursor glow
-var cg = document.getElementById("cg");
-document.addEventListener("mousemove", function(e) {
-  cg.style.left = e.clientX + "px";
-  cg.style.top  = e.clientY + "px";
-});
-
-// Nav highlight
-var secs = document.querySelectorAll("section[id]");
-var nls  = document.querySelectorAll(".nav-links a");
-window.addEventListener("scroll", function() {
-  var cur = "";
-  secs.forEach(function(s) { if (window.scrollY >= s.offsetTop - 160) cur = s.id; });
-  nls.forEach(function(a) { a.style.color = a.getAttribute("href") === "#" + cur ? "var(--g3)" : ""; });
-}, { passive: true });
-
-// Contact form
-document.getElementById("cform").addEventListener("submit", function(e) {
-  e.preventDefault();
-  var btn = this.querySelector(".fsub");
-  btn.textContent = "SENDING..."; btn.style.opacity = ".7";
-  setTimeout(function() { btn.style.display = "none"; document.getElementById("fsuccess").style.display = "block"; }, 1200);
-});
-</script>
-
-<script>
-// ══════════════════════════════════════
-//  LUXURY SOUND ENGINE — Web Audio API
-//  All sounds generated in-browser, no files needed
-// ══════════════════════════════════════
-const SFX = (function() {
-  let ctx = null;
-
-  function getCtx() {
-    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
-    return ctx;
+// ═══════════════════════════════════════
+//  LUXURY SOUND ENGINE
+// ═══════════════════════════════════════
+var SFX = (function(){
+  var ctx = null;
+  function getCtx(){ if(!ctx) ctx=new(window.AudioContext||window.webkitAudioContext)(); if(ctx.state==='suspended') ctx.resume(); return ctx; }
+  function navHover(){
+    try{
+      var c=getCtx(),o=c.createOscillator(),g=c.createGain();
+      o.type='sine'; o.frequency.setValueAtTime(3200,c.currentTime); o.frequency.exponentialRampToValueAtTime(2400,c.currentTime+0.06);
+      g.gain.setValueAtTime(0,c.currentTime); g.gain.linearRampToValueAtTime(0.05,c.currentTime+0.005); g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.07);
+      o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime+0.08);
+    }catch(e){}
   }
-
-  // Soft high tick — like a luxury watch click
-  function navHover() {
-    try {
-      const c = getCtx();
-      const o = c.createOscillator();
-      const g = c.createGain();
-      o.connect(g); g.connect(c.destination);
-      o.type = 'sine';
-      o.frequency.setValueAtTime(1800, c.currentTime);
-      o.frequency.exponentialRampToValueAtTime(2200, c.currentTime + 0.04);
-      g.gain.setValueAtTime(0.0, c.currentTime);
-      g.gain.linearRampToValueAtTime(0.06, c.currentTime + 0.005);
-      g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + 0.08);
-      o.start(c.currentTime);
-      o.stop(c.currentTime + 0.09);
-    } catch(e) {}
+  function btnClick(){
+    try{
+      var c=getCtx(),now=c.currentTime;
+      var o1=c.createOscillator(),g1=c.createGain();
+      o1.type='sine'; o1.frequency.setValueAtTime(880,now); o1.frequency.exponentialRampToValueAtTime(820,now+0.3);
+      g1.gain.setValueAtTime(0,now); g1.gain.linearRampToValueAtTime(0.12,now+0.01); g1.gain.exponentialRampToValueAtTime(0.001,now+0.35);
+      o1.connect(g1); g1.connect(c.destination); o1.start(now); o1.stop(now+0.38);
+      var o2=c.createOscillator(),g2=c.createGain();
+      o2.type='sine'; o2.frequency.setValueAtTime(1760,now);
+      g2.gain.setValueAtTime(0,now); g2.gain.linearRampToValueAtTime(0.05,now+0.008); g2.gain.exponentialRampToValueAtTime(0.001,now+0.22);
+      o2.connect(g2); g2.connect(c.destination); o2.start(now); o2.stop(now+0.25);
+    }catch(e){}
   }
-
-  // Warm double-chime — like pressing a hotel elevator button
-  function btnClick() {
-    try {
-      const c = getCtx();
-      // First chime
-      const o1 = c.createOscillator();
-      const g1 = c.createGain();
-      o1.connect(g1); g1.connect(c.destination);
-      o1.type = 'sine';
-      o1.frequency.setValueAtTime(880, c.currentTime);
-      g1.gain.setValueAtTime(0.0, c.currentTime);
-      g1.gain.linearRampToValueAtTime(0.12, c.currentTime + 0.01);
-      g1.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + 0.3);
-      o1.start(c.currentTime);
-      o1.stop(c.currentTime + 0.32);
-      // Second chime (harmony, slightly delayed)
-      const o2 = c.createOscillator();
-      const g2 = c.createGain();
-      o2.connect(g2); g2.connect(c.destination);
-      o2.type = 'sine';
-      o2.frequency.setValueAtTime(1108, c.currentTime + 0.06);
-      g2.gain.setValueAtTime(0.0, c.currentTime + 0.06);
-      g2.gain.linearRampToValueAtTime(0.08, c.currentTime + 0.08);
-      g2.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + 0.4);
-      o2.start(c.currentTime + 0.06);
-      o2.stop(c.currentTime + 0.42);
-    } catch(e) {}
-  }
-
-  // Rising soft chime — like opening a premium box
-  function modalOpen() {
-    try {
-      const c = getCtx();
-      const notes = [523, 659, 784, 1047]; // C5 E5 G5 C6
-      notes.forEach(function(freq, i) {
-        const o = c.createOscillator();
-        const g = c.createGain();
-        o.connect(g); g.connect(c.destination);
-        o.type = 'sine';
-        const t = c.currentTime + i * 0.07;
-        o.frequency.setValueAtTime(freq, t);
-        g.gain.setValueAtTime(0.0, t);
-        g.gain.linearRampToValueAtTime(0.09, t + 0.015);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.45);
-        o.start(t);
-        o.stop(t + 0.5);
+  function modalOpen(){
+    try{
+      var c=getCtx(),now=c.currentTime;
+      [523,659,784,1047].forEach(function(freq,i){
+        var o=c.createOscillator(),g=c.createGain(),t=now+i*0.07;
+        o.type='sine'; o.frequency.setValueAtTime(freq,t);
+        g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(0.07,t+0.015); g.gain.exponentialRampToValueAtTime(0.001,t+0.22);
+        o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+0.25);
       });
-    } catch(e) {}
+    }catch(e){}
   }
-
-  // Descending soft chime — like closing a jewellery box
-  function modalClose() {
-    try {
-      const c = getCtx();
-      const notes = [1047, 784, 659, 523]; // C6 G5 E5 C5
-      notes.forEach(function(freq, i) {
-        const o = c.createOscillator();
-        const g = c.createGain();
-        o.connect(g); g.connect(c.destination);
-        o.type = 'sine';
-        const t = c.currentTime + i * 0.065;
-        o.frequency.setValueAtTime(freq, t);
-        g.gain.setValueAtTime(0.0, t);
-        g.gain.linearRampToValueAtTime(0.07, t + 0.015);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + 0.38);
-        o.start(t);
-        o.stop(t + 0.42);
+  function modalClose(){
+    try{
+      var c=getCtx(),now=c.currentTime;
+      [784,659,523].forEach(function(freq,i){
+        var o=c.createOscillator(),g=c.createGain(),t=now+i*0.06;
+        o.type='sine'; o.frequency.setValueAtTime(freq,t);
+        g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(0.055,t+0.01); g.gain.exponentialRampToValueAtTime(0.001,t+0.18);
+        o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+0.2);
       });
-    } catch(e) {}
+    }catch(e){}
   }
-
-  return { navHover, btnClick, modalOpen, modalClose };
+  return {navHover:navHover, btnClick:btnClick, modalOpen:modalOpen, modalClose:modalClose};
 })();
 
-// ── NAV HOVER — soft tick on each link ──
-document.querySelectorAll('.nav-links a').forEach(function(link) {
-  link.addEventListener('mouseenter', function() { SFX.navHover(); });
+document.querySelectorAll('.nav-links a').forEach(function(l){ l.addEventListener('mouseenter', function(){ SFX.navHover(); }); });
+document.querySelectorAll('.btn-g,.btn-o').forEach(function(b){ b.addEventListener('click', function(){ SFX.btnClick(); }); });
+
+// ═══════════════════════════════════════
+//  NAV + SCROLL + FORM
+// ═══════════════════════════════════════
+var secs = document.querySelectorAll('section[id]');
+var nls  = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', function(){
+  var cur='';
+  secs.forEach(function(s){ if(window.scrollY>=s.offsetTop-160) cur=s.id; });
+  nls.forEach(function(a){ a.style.color=a.getAttribute('href')==='#'+cur?'var(--g3)':''; });
+},{passive:true});
+
+document.getElementById('cform').addEventListener('submit', function(e){
+  e.preventDefault();
+  var btn=this.querySelector('.fsub');
+  btn.textContent='SENDING...'; btn.style.opacity='.7';
+  setTimeout(function(){ btn.style.display='none'; document.getElementById('fsuccess').style.display='block'; },1200);
 });
-
-// ── BUTTON CLICKS — warm double chime ──
-document.querySelectorAll('.btn-g, .btn-o').forEach(function(btn) {
-  btn.addEventListener('click', function() { SFX.btnClick(); });
-});
-
-// ── MODAL OPEN — rising chime ──
-// Wrap openArticle to trigger sound
-var _origOpen = window.openArticle;
-window.openArticle = function(idx) {
-  SFX.modalOpen();
-  if (_origOpen) _origOpen(idx);
-};
-
-// ── MODAL CLOSE — descending chime ──
-var _origClose = window.closeArticle;
-window.closeArticle = function() {
-  SFX.modalClose();
-  if (_origClose) _origClose();
-};
-
-// ── MUTE TOGGLE BUTTON ──
-var muted = false;
-var muteBtn = document.createElement('button');
-muteBtn.id = 'muteBtn';
-muteBtn.textContent = '♪ SOUND ON';
-muteBtn.style.cssText = [
-  'position:fixed', 'bottom:24px', 'right:24px', 'z-index:999',
-  'font-family:"Share Tech Mono",monospace', 'font-size:.55rem',
-  'letter-spacing:2px', 'color:#c9932a',
-  'border:1px solid rgba(232,184,75,0.3)',
-  'padding:7px 14px', 'border-radius:2px',
-  'background:rgba(8,8,12,0.9)',
-  'cursor:pointer', 'transition:all .3s'
-].join(';');
-muteBtn.addEventListener('mouseenter', function() { this.style.borderColor='rgba(232,184,75,0.6)'; this.style.color='#ffd966'; });
-muteBtn.addEventListener('mouseleave', function() { this.style.borderColor='rgba(232,184,75,0.3)'; this.style.color='#c9932a'; });
-muteBtn.addEventListener('click', function() {
-  muted = !muted;
-  this.textContent = muted ? '♪ SOUND OFF' : '♪ SOUND ON';
-  if (muted) {
-    SFX.navHover = SFX.btnClick
+</script>
+</body>
+</html>
